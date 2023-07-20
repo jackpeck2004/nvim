@@ -81,6 +81,13 @@ local lsp = require('lsp-zero')
 lsp.preset('recommended')
 lsp.setup()
 
+lsp.ensure_installed({
+    'tsserver',
+    'eslint',
+    'sumneko_lua',
+    'gopls'
+})
+
 vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]
 
 lsp.on_attach(function(client, bufnr)
