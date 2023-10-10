@@ -27,10 +27,9 @@ return require('packer').startup(function(use)
     use({
         'rose-pine/neovim',
         as = 'rose-pine',
-        config = function()
-            vim.cmd('colorscheme rose-pine')
-        end
     })
+
+    use 'google/vim-colorscheme-primary'
 
     use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
 
@@ -74,6 +73,13 @@ return require('packer').startup(function(use)
     use 'gpanders/editorconfig.nvim'
 
     use 'terrortylor/nvim-comment'
+
+    use {
+        'google/executor.nvim',
+        requires = {
+            'MunifTanjim/nui.nvim'
+        }
+    }
 
     if packer_bootstrap then
         require('packer').sync()
