@@ -78,6 +78,14 @@ require("lazy").setup({
             "MunifTanjim/nui.nvim"
         }
     },
+
+    {
+        'numToStr/Comment.nvim',
+        opts = {
+            -- add any options here
+        },
+        lazy = false,
+    }
 }, {
     defaults = { lazy = true },
 })
