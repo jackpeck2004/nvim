@@ -16,3 +16,4 @@ vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
 vim.opt.splitright = true
+--vim.opt.clipboard = "unnamed"
