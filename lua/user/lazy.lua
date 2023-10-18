@@ -36,7 +36,16 @@ require("lazy").setup({
         build = ":TSUpdate",
     },
 
-    {
+    {'williamboman/mason.nvim'},
+    {'williamboman/mason-lspconfig.nvim'},
+
+    {'VonHeikemen/lsp-zero.nvim', branch = 'v3.x'},
+    {'neovim/nvim-lspconfig'},
+    {'hrsh7th/cmp-nvim-lsp'},
+    {'hrsh7th/nvim-cmp'},
+    {'L3MON4D3/LuaSnip'},
+
+    --[[ {
         "VonHeikemen/lsp-zero.nvim",
         dependencies = {
             -- LSP Support
@@ -57,6 +66,16 @@ require("lazy").setup({
             { "rafamadriz/friendly-snippets" },
         }
     },
+]]
+
+    -- Nvimtree (File Explorer)
+    --[[ {
+        'nvim-tree/nvim-tree.lua',
+        lazy = true,
+        dependencies = {
+            'nvim-tree/nvim-web-devicons',
+        },
+    }, ]]
 
     "jwalton512/vim-blade",
 

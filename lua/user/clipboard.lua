@@ -1,4 +1,4 @@
-if IsWsl() then
+--[[ if IsWsl() then
     vim.g.clipboard = {
         name = 'WslClipboard',
         copy = {
@@ -14,4 +14,4 @@ if IsWsl() then
     vim.opt.clipboard = "unnamedplus"
 else
     vim.opt.clipboard = "unnamed"
-end
+end ]]
