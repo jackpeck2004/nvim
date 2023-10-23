@@ -3,6 +3,7 @@ return {
     dependencies = {
         "MunifTanjim/nui.nvim"
     },
+    opts = {},
     config = function ()
         local keymap = vim.keymap
 
