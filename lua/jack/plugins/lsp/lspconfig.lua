@@ -71,16 +71,17 @@ return {
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
 
-    -- configure html server
+    --[[ -- configure html server
     lspconfig["html"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
-    })
+    }) ]]
 
     -- configure typescript server with plugin
     lspconfig["tsserver"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
+      filetypes = { "svelte", "typescript", "typescriptreact", "javascriptreact", "javascript", "html" },
     })
 
     -- configure css server
@@ -93,9 +94,9 @@ return {
     lspconfig["tailwindcss"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
+      filetypes = { "svelte", "typescriptreact", "javascriptreact", "js", "html" },
     })
-
-    -- configure svelte server
+    --[[ -- configure svelte server
     lspconfig["svelte"].setup({
       capabilities = capabilities,
       on_attach = function(client, bufnr)
@@ -111,12 +112,13 @@ return {
         })
       end,
     })
+]]
 
-    -- configure prisma orm server
+    --[[ -- configure prisma orm server
     lspconfig["prismals"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
-    })
+    }) ]]
 
     -- configure graphql language server
     lspconfig["graphql"].setup({
@@ -125,18 +127,18 @@ return {
       filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
     })
 
-    -- configure emmet language server
+    --[[ -- configure emmet language server
     lspconfig["emmet_ls"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
       filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
-    })
+    }) ]]
 
-    -- configure python server
+    --[[ -- configure python server
     lspconfig["pyright"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
-    })
+    }) ]]
 
     -- configure lua server (with special settings)
     lspconfig["lua_ls"].setup({

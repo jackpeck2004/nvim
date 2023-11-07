@@ -36,8 +36,8 @@ return {
         builtin.grep_string({ search = vim.fn.input("Search: ") });
     end)
 
-    telescope.load_extension "file_browser"
+    --[[ telescope.load_extension "file_browser"
 
-    keymap.set('n', '<leader>fb',   ":Telescope file_browser path=%:p:h select_buffer=true<cr>", { noremap = true })
+    keymap.set('n', '<leader>fb',   ":Telescope file_browser path=%:p:h select_buffer=true<cr>", { noremap = true }) ]]
   end,
 }
