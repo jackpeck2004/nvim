@@ -81,7 +81,7 @@ return {
     lspconfig["tsserver"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
-      filetypes = { "svelte", "typescript", "typescriptreact", "javascriptreact", "javascript", "html" },
+      filetypes = { "svelte", "typescript", "typescriptreact", "javascriptreact", "javascript", "html", "astro" },
     })
 
     -- configure css server
@@ -94,7 +94,13 @@ return {
     lspconfig["tailwindcss"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
-      filetypes = { "svelte", "typescriptreact", "javascriptreact", "js", "html" },
+      filetypes = { "svelte", "typescriptreact", "javascriptreact", "js", "html", "astro" },
+    })
+
+    lspconfig["astro"].setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+      filetypes = { "astro" },
     })
     --[[ -- configure svelte server
     lspconfig["svelte"].setup({
