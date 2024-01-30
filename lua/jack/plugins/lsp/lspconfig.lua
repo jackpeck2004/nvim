@@ -81,7 +81,7 @@ return {
     lspconfig["tsserver"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
-      filetypes = { "svelte", "typescript", "typescriptreact", "javascriptreact", "javascript", "html", "astro" },
+      filetypes = { "svelte", "typescript", "typescriptreact", "javascriptreact", "javascript", "html", "astro", "templ" },
     })
 
     -- configure css server
@@ -94,7 +94,7 @@ return {
     lspconfig["tailwindcss"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
-      filetypes = { "svelte", "typescriptreact", "javascriptreact", "js", "html", "astro" },
+      filetypes = { "svelte", "typescriptreact", "javascriptreact", "js", "html", "astro", "templ" },
     })
 
     lspconfig["astro"].setup({
@@ -133,6 +133,28 @@ return {
       filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
     })
 
+    -- configure golang
+    lspconfig["gopls"].setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+      filetypes = { "go", "gomod" },
+    })
+
+    -- set the correct filetype for templ files
+    vim.api.nvim_exec([[
+      augroup TemplFileType
+        autocmd!
+        autocmd BufNewFile,BufRead *.templ setfiletype templ
+      augroup END
+    ]], false)
+
+    -- configure templ
+    lspconfig["templ"].setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+      filetypes = { "templ" },
+    })
+
     --[[ -- configure emmet language server
     lspconfig["emmet_ls"].setup({
       capabilities = capabilities,
@@ -145,6 +167,7 @@ return {
       capabilities = capabilities,
       on_attach = on_attach,
     }) ]]
+    -- Set filetype for *.templ files to 'templ'
 
     -- configure lua server (with special settings)
     lspconfig["lua_ls"].setup({
