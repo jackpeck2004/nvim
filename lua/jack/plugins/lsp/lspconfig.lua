@@ -81,20 +81,21 @@ return {
     lspconfig["tsserver"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
-      filetypes = { "svelte", "typescript", "typescriptreact", "javascriptreact", "javascript", "html", "astro", "templ" },
+      filetypes = { "svelte", "typescript", "typescriptreact", "javascriptreact", "javascript", "html", "astro", "templ", "vue" },
     })
 
     -- configure css server
     lspconfig["cssls"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
+      filetypes = { "css", "vue", "astro"}
     })
 
     -- configure tailwindcss server
     lspconfig["tailwindcss"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
-      filetypes = { "svelte", "typescriptreact", "javascriptreact", "js", "html", "astro", "templ" },
+      filetypes = { "svelte", "typescriptreact", "javascriptreact", "js", "html", "astro", "templ", "vue" },
     })
 
     lspconfig["astro"].setup({
@@ -155,12 +156,28 @@ return {
       filetypes = { "templ" },
     })
 
+    lspconfig["intelephense"].setup({
+        capabilities = capabilities,
+        on_attach = on_attach
+    })
+
+    lspconfig["pyright"].setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
+
+    lspconfig["vuels"].setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
+
     --[[ -- configure emmet language server
     lspconfig["emmet_ls"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
       filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
     }) ]]
+
 
     --[[ -- configure python server
     lspconfig["pyright"].setup({
