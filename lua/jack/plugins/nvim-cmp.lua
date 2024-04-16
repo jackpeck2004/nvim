@@ -44,13 +44,18 @@ return {
         { name = "luasnip" }, -- snippets
         { name = "buffer" }, -- text within current buffer
         { name = "path" }, -- file system paths
-        { name = "nvim_lsp_signature_help"}
+        { name = "nvim_lsp_signature_help"},
+        { name = "copilot" } -- GitHub Copilot
       }),
       -- configure lspkind for vs-code like pictograms in completion menu
       formatting = {
         format = lspkind.cmp_format({
           maxwidth = 50,
           ellipsis_char = "...",
+          mode = "symbol",
+          symbol_map = {
+              Copilot = "G"
+          }
         }),
       },
     })
