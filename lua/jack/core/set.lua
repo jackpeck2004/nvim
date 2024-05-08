@@ -6,6 +6,7 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
 vim.opt.wrap = false
+vim.opt.linebreak = true    -- if wrap then break on line not character
 
 vim.opt.swapfile = false
 vim.opt.backup = false
