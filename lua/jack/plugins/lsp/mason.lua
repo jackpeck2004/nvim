@@ -30,9 +30,8 @@ return {
         "tsserver",
         "tailwindcss",
         "lua_ls",
-        "prettier",
         "astro",
-        "docker_compose_language_server",
+        "docker_compose_language_service",
         "dockerls",
         "eslint",
         "rust_analyzer"
