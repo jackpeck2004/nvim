@@ -100,11 +100,11 @@ return {
 		})
 
 		-- configure css server
-		lspconfig["cssls"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-			filetypes = { "css", "vue", "astro" },
-		})
+		-- lspconfig["cssls"].setup({
+		-- 	capabilities = capabilities,
+		-- 	on_attach = on_attach,
+		-- 	filetypes = { "css", "vue", "astro" },
+		-- })
 
 		-- configure tailwindcss server
 		lspconfig["tailwindcss"].setup({
