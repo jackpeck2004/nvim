@@ -2,10 +2,17 @@
 vim.g.mapleader = " "
 
 -- Custom keybindings
-vim.keymap.set("n", "<leader>pv", vim.cmd.Explore)
-vim.keymap.set("n", "<leader>tt", vim.cmd.tabnew)
-vim.keymap.set("n", "<leader>tn", vim.cmd.tabnext)
-vim.keymap.set("n", "<leader>tp", vim.cmd.tabprev)
-vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
+-- vim.keymap.set("n", "<leader>pv", vim.cmd.Explore)
+local opts = { noremap = true, silent = true }
 
-vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+opts.desc = "Create new tab"
+vim.keymap.set("n", "<leader>tt", vim.cmd.tabnew, opts)
+
+opts.desc = "Switch to next tab"
+vim.keymap.set("n", "<leader>tn", vim.cmd.tabnext, opts)
+
+opts.desc = "Switch to previous tab"
+vim.keymap.set("n", "<leader>tp", vim.cmd.tabprev, opts)
+
+opts.desc = "Open diagnostic"
+vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)
