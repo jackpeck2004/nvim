@@ -17,4 +17,7 @@ vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
 vim.opt.splitright = true
---vim.opt.clipboard = "unnamed"
+
+if vim.lsp.inlay_hint then
+    vim.lsp.inlay_hint.enable(true)
+end
