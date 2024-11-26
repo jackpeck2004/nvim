@@ -21,3 +21,5 @@ vim.opt.splitright = true
 if vim.lsp.inlay_hint then
     vim.lsp.inlay_hint.enable(true)
 end
+
+vim.opt.clipboard = "unnamedplus"
