@@ -5,15 +5,15 @@ return {
   version = false, -- set this if you want to always pull the latest change
   opts = {
     -- add any opts here
-    provider = "gemini",
-    claude = {
-        model = "claude-3-7-sonnet-20250219",
-        temperature = 0,
-        max_token = 8192
-    },
-    gemini = {
-        -- model = "gemini-2.0-flash"
-        model = "gemini-2.5-pro-preview-03-25"
+    provider = "claude",
+    providers = {
+        claude = {
+            model = "claude-sonnet-4-20250514",
+        },
+        gemini = {
+            -- model = "gemini-2.0-flash"
+            model = "gemini-2.5-pro-preview-03-25"
+        }
     }
   },
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
