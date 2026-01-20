@@ -76,6 +76,7 @@ return {
 			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 		end
 
+        lspconfig.biome.setup{}
 		--[[ -- configure html server
     lspconfig["html"].setup({
       capabilities = capabilities,
