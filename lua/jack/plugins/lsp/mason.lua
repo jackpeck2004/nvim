@@ -30,11 +30,10 @@ return {
         "ts_ls",
         "tailwindcss",
         "lua_ls",
-        "astro",
         "docker_compose_language_service",
         "dockerls",
         "eslint",
-        "rust_analyzer"
+        "pyrefly"
       },
       -- auto-install configured servers (with lspconfig)
       automatic_installation = true, -- not the same as ensure_installed
@@ -45,6 +44,7 @@ return {
         "prettier", -- prettier formatter
         "stylua", -- lua formatter
         "eslint_d", -- js linter
+        "biome"
       },
     })
   end,
