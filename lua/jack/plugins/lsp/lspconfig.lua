@@ -15,66 +15,65 @@ return {
 
 		local keymap = vim.keymap -- for conciseness
 
+		local telescope_builtin = require("telescope.builtin")
+
 		local opts = { noremap = true, silent = true }
 		local on_attach = function(client, bufnr)
 			opts.buffer = bufnr
 
-			-- set keybinds
 			opts.desc = "Show LSP references"
-			keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
+			keymap.set("n", "gR", telescope_builtin.lsp_references, opts)
 
 			opts.desc = "Go to declaration"
-			keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- go to declaration
+			keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
 
 			opts.desc = "Show LSP definitions"
-			keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts) -- show lsp definitions
+			keymap.set("n", "gd", telescope_builtin.lsp_definitions, opts)
 
 			opts.desc = "Show LSP implementations"
-			keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts) -- show lsp implementations
+			keymap.set("n", "gi", telescope_builtin.lsp_implementations, opts)
 
 			opts.desc = "Show LSP type definitions"
-			keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts) -- show lsp type definitions
+			keymap.set("n", "gt", telescope_builtin.lsp_type_definitions, opts)
 
 			opts.desc = "See available code actions"
-			keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts) -- see available code actions, in visual mode will apply to selection
+			keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
 
 			opts.desc = "Smart rename"
-			keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- smart rename
+			keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 
 			opts.desc = "Show buffer diagnostics"
-			keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts) -- show  diagnostics for file
+			keymap.set("n", "<leader>D", function() telescope_builtin.diagnostics({ bufnr = 0 }) end, opts)
 
 			opts.desc = "Show line diagnostics"
-			keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
+			keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
 
 			opts.desc = "Go to previous diagnostic"
-			keymap.set("n", "[d", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
+			keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1 }) end, opts)
 
 			opts.desc = "Go to next diagnostic"
-			keymap.set("n", "]d", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
+			keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1 }) end, opts)
 
 			opts.desc = "Show documentation for what is under cursor"
-			keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
+			keymap.set("n", "K", vim.lsp.buf.hover, opts)
 
 			opts.desc = "Restart LSP"
-			keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
-
-			-- opts.desc = "Format (Sync)"
-			-- keymap.set("n", "<leader>ff", vim.lsp.buf.formatting_sync, opts) -- mapping to format file
-
-			-- vim.api.nvim_command("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+			keymap.set("n", "<leader>rs", "<cmd>LspRestart<CR>", opts)
 		end
 
 		-- used to enable autocompletion (assign to every lsp server config)
 		local capabilities = cmp_nvim_lsp.default_capabilities()
 
-		-- Change the Diagnostic symbols in the sign column (gutter)
-		-- (not in youtube nvim video)
-		local signs = { Error = "x ", Warn = "⚠ ", Hint = "? ", Info = "i " }
-		for type, icon in pairs(signs) do
-			local hl = "DiagnosticSign" .. type
-			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-		end
+		vim.diagnostic.config({
+			signs = {
+				text = {
+					[vim.diagnostic.severity.ERROR] = "x ",
+					[vim.diagnostic.severity.WARN] = "⚠ ",
+					[vim.diagnostic.severity.HINT] = "? ",
+					[vim.diagnostic.severity.INFO] = "i ",
+				},
+			},
+		})
 
         lspconfig.biome.setup{}
 		--[[ -- configure html server
@@ -157,16 +156,11 @@ return {
 			filetypes = { "go", "gomod" },
 		})
 
-		-- set the correct filetype for templ files
-		vim.api.nvim_exec(
-			[[
-      augroup TemplFileType
-        autocmd!
-        autocmd BufNewFile,BufRead *.templ setfiletype templ
-      augroup END
-    ]],
-			false
-		)
+		vim.filetype.add({
+			extension = {
+				templ = "templ",
+			},
+		})
 
 		-- configure templ
 		lspconfig["templ"].setup({
@@ -222,7 +216,7 @@ return {
 					workspace = {
 						-- make language server aware of runtime files
 						library = {
-							[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+							[vim.env.VIMRUNTIME .. "/lua"] = true,
 							[vim.fn.stdpath("config") .. "/lua"] = true,
 						},
 					},
