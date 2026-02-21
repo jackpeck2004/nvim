@@ -8,11 +8,11 @@ return {
     provider = "claude",
     providers = {
         claude = {
-            model = "claude-sonnet-4-20250514",
+            model = "claude-sonnet-4-5-20250929",
         },
         gemini = {
             -- model = "gemini-2.0-flash"
-            model = "gemini-2.5-pro-preview-03-25"
+            model = "gemini-3-flash-preview"
         }
     }
   },

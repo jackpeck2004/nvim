@@ -8,8 +8,6 @@ return {
 	},
 	config = function()
 		-- import lspconfig plugin
-		local lspconfig = require("lspconfig")
-
 		-- import cmp-nvim-lsp plugin
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
@@ -75,17 +73,10 @@ return {
 			},
 		})
 
-        lspconfig.biome.setup{}
-		--[[ -- configure html server
-    lspconfig["html"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    }) ]]
-
 		-- configure typescript server with plugin
-		lspconfig["ts_ls"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
+        vim.lsp.config("ts_ls", {
+            on_attach = on_attach,
+            capabilities = capabilities,
 			filetypes = {
 				"svelte",
 				"typescript",
@@ -97,64 +88,26 @@ return {
 				"templ",
 				"vue",
 			},
-		})
-
-		-- configure css server
-		-- lspconfig["cssls"].setup({
-		-- 	capabilities = capabilities,
-		-- 	on_attach = on_attach,
-		-- 	filetypes = { "css", "vue", "astro" },
-		-- })
+        })
 
 		-- configure tailwindcss server
-		lspconfig["tailwindcss"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-			filetypes = { "svelte", "typescriptreact", "javascriptreact", "js", "html", "astro", "templ", "vue" },
-		})
-
-		lspconfig["astro"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-			filetypes = { "astro" },
-		})
-		--[[ -- configure svelte server
-    lspconfig["svelte"].setup({
-      capabilities = capabilities,
-      on_attach = function(client, bufnr)
-        on_attach(client, bufnr)
-
-        vim.api.nvim_create_autocmd("BufWritePost", {
-          pattern = { "*.js", "*.ts" },
-          callback = function(ctx)
-            if client.name == "svelte" then
-              client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.file })
-            end
-          end,
+        vim.lsp.config("tailwindcss", {
+            on_attach = on_attach,
+            capabilities = capabilities,
+            filetypes = { "svelte", "typescriptreact", "javascriptreact", "js", "html", "astro", "templ", "vue" },
         })
-      end,
-    })
-]]
 
-		--[[ -- configure prisma orm server
-    lspconfig["prismals"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    }) ]]
+        vim.lsp.config("intelephense", {
+            on_attach = on_attach,
+            capabilities = capabilities,
+        })
 
-		-- configure graphql language server
-		lspconfig["graphql"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-			filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
-		})
+        vim.lsp.config("biome", {})
 
-		-- configure golang
-		lspconfig["gopls"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-			filetypes = { "go", "gomod" },
-		})
+        vim.lsp.config("pyrefly", {
+            on_attach = on_attach,
+            capabilities = capabilities,
+        })
 
 		vim.filetype.add({
 			extension = {
@@ -162,7 +115,6 @@ return {
 			},
 		})
 
-		-- configure templ
 		lspconfig["templ"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
@@ -189,32 +141,15 @@ return {
 			on_attach = on_attach,
 		})
 
-		--[[ -- configure emmet language server
-    lspconfig["emmet_ls"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-      filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
-    }) ]]
-
-		--[[ -- configure python server
-    lspconfig["pyright"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    }) ]]
-		-- Set filetype for *.templ files to 'templ'
-
-		-- configure lua server (with special settings)
 		lspconfig["lua_ls"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
-			settings = { -- custom settings for lua
+			settings = {
 				Lua = {
-					-- make the language server recognize "vim" global
 					diagnostics = {
 						globals = { "vim" },
 					},
 					workspace = {
-						-- make language server aware of runtime files
 						library = {
 							[vim.env.VIMRUNTIME .. "/lua"] = true,
 							[vim.fn.stdpath("config") .. "/lua"] = true,
